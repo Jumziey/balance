@@ -1,0 +1,6 @@
+May need freeglut and GLU libraries to compile.
+
+Reads x y z rotation from stdin, in degrees.
+If entering manually, enter values followed by newline. Then press CTRL-D.
+
+Window will look weird until first values are set.
