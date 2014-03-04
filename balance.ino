@@ -77,7 +77,7 @@ enum {
 	measure_light = 9,
 	
 	ss = 10,	//Sd card setting
-	logtime = 8*1000,
+	logtime = 120000 //in milliseconds
 	
 };
 
@@ -102,7 +102,7 @@ typedef struct Data Data;
 void setup() 
 {
 
-	
+	delay(500);
 	Serial.begin(9600);
 	Wire.begin();
         delay(100);
@@ -111,13 +111,10 @@ void setup()
 	//delay(warn_time);
 	
 	//Initialize the 6dof
-        pln("Before Acc init");
         delay(100);
 	initAcc(100);
-        pln("Acc init done, starting gyro init");
         delay(100);
        	initGyro(100);
-        pln("Gyro init done");
 	delay(100);
 	/*
 	logfile = initSD();
@@ -147,7 +144,7 @@ void loop()
         
 	if((millis()-start_time) > logtime)
 	{
-		pln("logging done");
+		pln("quit");
 		//logfile.close();
 		//digitalWrite(measure_light, LOW);
 		delay(200); //So the arduino has time to empty the print buffer
@@ -314,9 +311,9 @@ void filePrint(Data acc, Data gyro)
 
 void logPrint(Data acc,Data gyro)
 {
-        p(acc.x); p("\t"); p(acc.y); p("\t");pl(acc.z);
+        p(acc.x); p("\t"); p(acc.y); p("\t");p(acc.z);
 	p("\t\t");
-        p(gyro.x); p("\t"); p(gyro.y); p("\t");pl(gyro.z);
+        p(gyro.x); p("\t"); p(gyro.y); p("\t");p(gyro.z);
 	p("\t\t");
 	pln((millis()-start_time));
 }
