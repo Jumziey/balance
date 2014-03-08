@@ -34,45 +34,75 @@ void DisplayFunc(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	/* A step backward, then spin the cube */
+	/* A step backward*/
 	glTranslatef(0, 0, -10);
+
+	//Scale down a bit to leave more space around the cube
+	glScalef(0.8, 0.8, 0.8);
+
+	//X rotation is first, followed by Y and Z
 	glRotatef(xRot, 1, 0, 0);
 	glRotatef(yRot, 0, 1, 0);
 	glRotatef(zRot, 0, 0, 1);
 
-	/* We tell we want to draw quads */
+	//Draw lines for the axes.
+	glBegin(GL_LINES);
+
+	//X axis
+	glColor3f(1, 0, 1);
+	glVertex3f(0, 0, 0);
+	glVertex3f(2, 0, 0);
+
+	//Y axis
+	glColor3f(1, 1, 0);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 2, 0);
+
+	//Z axis
+	glColor3f(0, 1, 1);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 0, 2);
+	
+	glEnd();
+
+	//Switch to drawing squares.
 	glBegin(GL_QUADS);
 
-	/* Every four calls to glVertex, a quad is drawn */
-	glColor3f(0, 0, 0); glVertex3f(-1, -1, -1);
-	glColor3f(0, 0, 1); glVertex3f(-1, -1,  1);
-	glColor3f(0, 1, 1); glVertex3f(-1,  1,  1);
-	glColor3f(0, 1, 0); glVertex3f(-1,  1, -1);
+	//Left side
+	glColor3f(0, 0, 0); glVertex3f(-1, -0.2, -1);
+	glColor3f(0, 0, 1); glVertex3f(-1, -0.2,  1);
+	glColor3f(0, 1, 1); glVertex3f(-1,  0.2,  1);
+	glColor3f(0, 1, 0); glVertex3f(-1,  0.2, -1);
 
-	glColor3f(1, 0, 0); glVertex3f( 1, -1, -1);
-	glColor3f(1, 0, 1); glVertex3f( 1, -1,  1);
-	glColor3f(1, 1, 1); glVertex3f( 1,  1,  1);
-	glColor3f(1, 1, 0); glVertex3f( 1,  1, -1);
+	//Right side
+	glColor3f(1, 0, 0); glVertex3f( 1, -0.2, -1);
+	glColor3f(1, 0, 1); glVertex3f( 1, -0.2,  1);
+	glColor3f(1, 1, 1); glVertex3f( 1,  0.2,  1);
+	glColor3f(1, 1, 0); glVertex3f( 1,  0.2, -1);
 
-	glColor3f(0, 0, 0); glVertex3f(-1, -1, -1);
-	glColor3f(0, 0, 1); glVertex3f(-1, -1,  1);
-	glColor3f(1, 0, 1); glVertex3f( 1, -1,  1);
-	glColor3f(1, 0, 0); glVertex3f( 1, -1, -1);
+	//Bottom side
+	glColor3f(0, 0, 0); glVertex3f(-1, -0.2, -1);
+	glColor3f(0, 0, 1); glVertex3f(-1, -0.2,  1);
+	glColor3f(1, 0, 1); glVertex3f( 1, -0.2,  1);
+	glColor3f(1, 0, 0); glVertex3f( 1, -0.2, -1);
 
-	glColor3f(0, 1, 0); glVertex3f(-1,  1, -1);
-	glColor3f(0, 1, 1); glVertex3f(-1,  1,  1);
-	glColor3f(1, 1, 1); glVertex3f( 1,  1,  1);
-	glColor3f(1, 1, 0); glVertex3f( 1,  1, -1);
+	//Top side
+	glColor3f(0, 1, 0); glVertex3f(-1,  0.2, -1);
+	glColor3f(0, 1, 1); glVertex3f(-1,  0.2,  1);
+	glColor3f(1, 1, 1); glVertex3f( 1,  0.2,  1);
+	glColor3f(1, 1, 0); glVertex3f( 1,  0.2, -1);
 
-	glColor3f(0, 0, 0); glVertex3f(-1, -1, -1);
-	glColor3f(0, 1, 0); glVertex3f(-1,  1, -1);
-	glColor3f(1, 1, 0); glVertex3f( 1,  1, -1);
-	glColor3f(1, 0, 0); glVertex3f( 1, -1, -1);
+	//Back side
+	glColor3f(0, 0, 0); glVertex3f(-1, -0.2, -1);
+	glColor3f(0, 1, 0); glVertex3f(-1,  0.2, -1);
+	glColor3f(1, 1, 0); glVertex3f( 1,  0.2, -1);
+	glColor3f(1, 0, 0); glVertex3f( 1, -0.2, -1);
 
-	glColor3f(0, 0, 1); glVertex3f(-1, -1,  1);
-	glColor3f(0, 1, 1); glVertex3f(-1,  1,  1);
-	glColor3f(1, 1, 1); glVertex3f( 1,  1,  1);
-	glColor3f(1, 0, 1); glVertex3f( 1, -1,  1);
+	//Front side
+	glColor3f(0, 0, 1); glVertex3f(-1, -0.2,  1);
+	glColor3f(0, 1, 1); glVertex3f(-1,  0.2,  1);
+	glColor3f(1, 1, 1); glVertex3f( 1,  0.2,  1);
+	glColor3f(1, 0, 1); glVertex3f( 1, -0.2,  1);
 
 	/* No more quads */
 	glEnd();
@@ -80,9 +110,6 @@ void DisplayFunc(void) {
 	/* End */
 	glFlush();
 	glutSwapBuffers();
-
-	/* Update again and again */
-	//glutPostRedisplay();
 }
 
 /*
@@ -120,22 +147,33 @@ void mainLoop() {
 	}
 }
 
+//Can be used instead of mainLoop to look at the glorious pancake spinning.
+void autoRot() {
+	xRot += 0.01;
+	yRot += 0.1;
+	zRot += 0.2;
+	glutPostRedisplay();
+}
+
 int main(int argc, char **argv) {
 	/* Creation of the window */
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(500, 500);
-	glutInitContextVersion(2, 1);  
+	glutInitContextVersion(1, 2);  
 	glutCreateWindow("Spinning cube");
 
 	/* OpenGL settings */
 	glClearColor(0, 0, 0, 0);
 	glEnable(GL_DEPTH_TEST);
-
+	glLineWidth(3);
+	
 	/* Declaration of the callbacks */
 	glutDisplayFunc(&DisplayFunc);
 	glutReshapeFunc(&ReshapeFunc);
 	glutKeyboardFunc(&KeyboardFunc);
+
+	//change mainLoop to autoRot to demo settings
 	glutIdleFunc(mainLoop);
 	
 	/* Loop */
