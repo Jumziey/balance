@@ -106,7 +106,8 @@ void setup()
 	Serial.begin(9600);
 	Wire.begin();
         delay(100);
-	//We need the 6dof to be placed correctly with no movement on it, lets give a warning.
+        p("x"); // X marks the sport! (very important for sync)
+       	//We need the 6dof to be placed correctly with no movement on it, lets give a warning.
 	//digitalWrite(warn_light, HIGH);
 	//delay(warn_time);
 	
